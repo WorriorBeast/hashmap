@@ -258,6 +258,36 @@ class HashMap {
 			return bucket.containsKey(key);
 		}
 	}
+
+	remove(key) {
+		if (key.length === 0) return;
+
+		const index = this.hash(key);
+
+		if (!this.buckets[index]) {
+			return false;
+		} else if (!this.buckets[index].head) {
+			const hashKey = Object.keys(this.buckets[index])[0];
+
+			if (key == hashKey) {
+				this.buckets[index] = undefined;
+				this.size--;
+
+				return true;
+			}
+
+			return false;
+		} else {
+			const nodeIndex = this.buckets[index].findNodeIndex(key);
+
+			if (!nodeIndex) return false;
+
+			this.buckets[index].removeAt(nodeIndex);
+			this.size--;
+
+			return true;
+		}
+	}
 }
 
 const test = new HashMap();
@@ -277,7 +307,8 @@ test.set('lion', 'golden');
 test.set('jet', 'green');
 test.set('mouse trap', 'yellow');
 
-console.log(test.has('dog'));
-console.log(test.has(''));
-console.log(test.has('ice cream'));
-console.log(test.has('destiny'));
+console.log(test.buckets);
+console.log(test.remove('carrot'));
+console.log(test.remove('mouse trap'));
+console.log(test.remove('apple'));
+console.log(test.buckets);
