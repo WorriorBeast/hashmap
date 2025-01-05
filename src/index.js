@@ -230,6 +230,19 @@ class HashMap {
 
 	set(key, value) {
 		if (key.length === 0) return;
+		if (this.size / this.capacity >= this.loadFactor) {
+			const keyValuePairs = this.entries();
+			const key = 0;
+			const value = 1;
+
+			this.capacity *= 2;
+			this.buckets = new Array(this.capacity);
+			this.size = 0;
+
+			keyValuePairs.forEach((keyValue) =>
+				this.set(keyValue[key], keyValue[value]),
+			);
+		}
 
 		const index = this.hash(key);
 
