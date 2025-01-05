@@ -219,6 +219,26 @@ class HashMap {
 			this.size++;
 		}
 	}
+
+	get(key) {
+		if (key.length === 0) return null;
+
+		const index = this.hash(key);
+		const bucket = this.buckets[index];
+
+		if (!bucket) {
+			return null;
+		} else if (!bucket.head) {
+			const bucketKey = Object.keys(bucket)[0];
+
+			return key == bucketKey ? bucket[key] : null;
+		} else {
+			const nodeIndex = bucket.findNodeIndex(key);
+			const node = bucket.at(nodeIndex);
+
+			return node.key === key ? node.value : null;
+		}
+	}
 }
 
 const test = new HashMap();
