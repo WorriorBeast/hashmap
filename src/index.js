@@ -185,11 +185,11 @@ class HashMap {
 
 	hash(key) {
 		let hashCode = 0;
-		const primeNumber = 31;
+		const PRIME_NUMBER = 31;
 
 		for (let i = 0; i < key.length; i++) {
 			hashCode =
-				(primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
+				(PRIME_NUMBER * hashCode + key.charCodeAt(i)) % this.capacity;
 		}
 
 		return hashCode;
@@ -206,10 +206,10 @@ class HashMap {
 		} else if (!this.buckets[index].head) {
 			const linkedList = new LinkedList();
 			const keyValue = Object.entries(this.buckets[index])[0];
-			const key = 0;
-			const value = 1;
+			const KEY = 0;
+			const VALUE = 1;
 
-			linkedList.append(keyValue[key], keyValue[value]);
+			linkedList.append(keyValue[KEY], keyValue[VALUE]);
 			linkedList.append(key, value);
 
 			this.buckets[index] = linkedList;
