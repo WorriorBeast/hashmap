@@ -195,6 +195,17 @@ class LinkedList {
 		}
 		return values;
 	}
+
+	getKeyValues() {
+		let keyValues = [];
+		let current = this.head;
+
+		while (current) {
+			keyValues.push([current.key, current.value]);
+			current = current.next;
+		}
+		return keyValues;
+	}
 }
 
 class HashMap {
