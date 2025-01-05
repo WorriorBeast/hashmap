@@ -1,4 +1,4 @@
-import './style.css';
+//import './style.css';
 
 class Node {
 	constructor(key = null, value = null, next = null) {
@@ -239,8 +239,45 @@ class HashMap {
 			return node.key === key ? node.value : null;
 		}
 	}
+
+	has(key) {
+		if (key.length === 0) return false;
+
+		const index = this.hash(key);
+		let bucket = this.buckets[index];
+
+		if (!bucket) {
+			return false;
+		} else if (!bucket.head) {
+			const hashKey = Object.keys(bucket)[0];
+
+			if (key == hashKey) return true;
+
+			return false;
+		} else {
+			return bucket.containsKey(key);
+		}
+	}
 }
 
 const test = new HashMap();
 
-console.log(test.hash('dog'));
+test.set('apple', 'red');
+test.set('banana', 'yellow');
+test.set('carrot', 'orange');
+test.set('dog', 'brown');
+test.set('elephant', 'gray');
+test.set('frog', 'green');
+test.set('grape', 'purple');
+test.set('hat', 'black');
+test.set('ice cream', 'white');
+test.set('jacket', 'blue');
+test.set('kite', 'pink');
+test.set('lion', 'golden');
+test.set('jet', 'green');
+test.set('mouse trap', 'yellow');
+
+console.log(test.has('dog'));
+console.log(test.has(''));
+console.log(test.has('ice cream'));
+console.log(test.has('destiny'));
