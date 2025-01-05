@@ -349,6 +349,24 @@ class HashMap {
 		}
 		return arrayKeys;
 	}
+
+	values() {
+		const arrayLength = this.capacity;
+		let arrayValues = [];
+
+		for (let i = 0; i < arrayLength; i++) {
+			const bucket = this.buckets[i];
+
+			if (!bucket) continue;
+
+			if (!bucket.head) {
+				arrayValues.push(Object.values(bucket)[0]);
+			} else {
+				arrayValues.push(...bucket.getValues());
+			}
+		}
+		return arrayValues;
+	}
 }
 
 const test = new HashMap();
@@ -369,4 +387,4 @@ test.set('jet', 'green');
 test.set('mouse trap', 'yellow');
 
 console.log(test.buckets);
-console.log(test.keys());
+console.log(test.values());
