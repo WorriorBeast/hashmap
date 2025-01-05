@@ -331,6 +331,24 @@ class HashMap {
 		this.buckets = new Array(this.capacity);
 		this.size = 0;
 	}
+
+	keys() {
+		const arrayLength = this.capacity;
+		let arrayKeys = [];
+
+		for (let i = 0; i < arrayLength; i++) {
+			const bucket = this.buckets[i];
+
+			if (!bucket) continue;
+
+			if (!bucket.head) {
+				arrayKeys.push(Object.keys(bucket)[0]);
+			} else {
+				arrayKeys.push(...bucket.getKeys());
+			}
+		}
+		return arrayKeys;
+	}
 }
 
 const test = new HashMap();
@@ -350,5 +368,5 @@ test.set('lion', 'golden');
 test.set('jet', 'green');
 test.set('mouse trap', 'yellow');
 
-test.clear();
 console.log(test.buckets);
+console.log(test.keys());
