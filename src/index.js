@@ -173,6 +173,17 @@ class LinkedList {
 			}
 		}
 	}
+
+	getKeys() {
+		let keys = [];
+		let current = this.head;
+
+		while (current) {
+			keys.push(current.key);
+			current = current.next;
+		}
+		return keys;
+	}
 }
 
 class HashMap {
