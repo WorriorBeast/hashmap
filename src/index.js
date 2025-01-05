@@ -288,6 +288,10 @@ class HashMap {
 			return true;
 		}
 	}
+
+	length() {
+		return this.size;
+	}
 }
 
 const test = new HashMap();
