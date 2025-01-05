@@ -180,6 +180,7 @@ class HashMap {
 		this.capacity = 16;
 		this.loadFactor = 0.75;
 		this.buckets = new Array(this.capacity);
+		this.size = 0;
 	}
 
 	hash(key) {
@@ -192,6 +193,31 @@ class HashMap {
 		}
 
 		return hashCode;
+	}
+
+	set(key, value) {
+		if (key.length === 0) return;
+
+		const index = this.hash(key);
+
+		if (!this.buckets[index]) {
+			this.buckets[index] = { [key]: value };
+			this.size++;
+		} else if (!this.buckets[index].head) {
+			const linkedList = new LinkedList();
+			const keyValue = Object.entries(this.buckets[index])[0];
+			const key = 0;
+			const value = 1;
+
+			linkedList.append(keyValue[key], keyValue[value]);
+			linkedList.append(key, value);
+
+			this.buckets[index] = linkedList;
+			this.size++;
+		} else {
+			this.buckets[index].append(key, value);
+			this.size++;
+		}
 	}
 }
 
