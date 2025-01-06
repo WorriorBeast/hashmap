@@ -255,14 +255,25 @@ class HashMap {
 			const KEY = 0;
 			const VALUE = 1;
 
-			linkedList.append(keyValue[KEY], keyValue[VALUE]);
-			linkedList.append(key, value);
+			if (key === keyValue[KEY]) {
+				this.buckets[index][key] = value;
+			} else {
+				linkedList.append(keyValue[KEY], keyValue[VALUE]);
+				linkedList.append(key, value);
 
-			this.buckets[index] = linkedList;
-			this.size++;
+				this.buckets[index] = linkedList;
+				this.size++;
+			}
 		} else {
-			this.buckets[index].append(key, value);
-			this.size++;
+			const nodeIndex = this.buckets[index].findNodeIndex(key);
+			const node = this.buckets[index].at(nodeIndex);
+
+			if (node.key === key) {
+				node.value = value;
+			} else {
+				this.buckets[index].append(key, value);
+				this.size++;
+			}
 		}
 	}
 
@@ -417,5 +428,8 @@ test.set('lion', 'golden');
 test.set('jet', 'green');
 test.set('mouse trap', 'yellow');
 
+test.set('ice cream', 'chocolate');
+test.set('dog', 'white');
+test.set('grape', 'green');
+
 console.log(test.buckets);
-console.log(test.entries());
