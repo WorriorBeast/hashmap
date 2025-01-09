@@ -1,6 +1,6 @@
 class Node {
-	constructor() {
-		this.key = null;
+	constructor(key) {
+		this.key = key;
 		this.next = null;
 	}
 }
@@ -201,4 +201,46 @@ class HashSet {
 
 		return hashCode;
 	}
+
+	set(key) {
+		if (key.length === 0) return;
+
+		const index = this.hash(key);
+
+		if (!this.buckets[index]) {
+			this.buckets[index] = key;
+		} else if (!this.buckets[index].head) {
+			if (key === this.buckets[index]) return;
+
+			const linkedList = new LinkedList();
+
+			linkedList.append(this.buckets[index]);
+			linkedList.append(key);
+
+			this.buckets[index] = linkedList;
+		} else {
+			if (this.buckets[index].containsKey(key)) return;
+
+			this.buckets[index].append(key);
+		}
+	}
 }
+
+const test = new HashSet();
+
+test.set('apple');
+test.set('banana');
+test.set('carrot');
+test.set('dog');
+test.set('elephant');
+test.set('frog');
+test.set('grape');
+test.set('hat');
+test.set('ice cream');
+test.set('jacket');
+test.set('kite');
+test.set('lion');
+test.set('jet');
+test.set('mouse trap');
+
+console.log(test.buckets);
