@@ -286,6 +286,10 @@ class HashSet {
 			return true;
 		}
 	}
+
+	length() {
+		return this.size;
+	}
 }
 
 const test = new HashSet();
@@ -295,6 +299,7 @@ test.set('banana');
 test.set('carrot');
 test.set('dog');
 test.set('elephant');
+console.log(test.size);
 test.set('frog');
 test.set('grape');
 test.set('hat');
@@ -304,8 +309,7 @@ test.set('kite');
 test.set('lion');
 test.set('jet');
 test.set('mouse trap');
+console.log(test.size);
 
-console.log(test.buckets);
 console.log(test.remove('apple'));
-console.log(test.remove('dog'));
-console.log(test.remove('games'));
+console.log(test.size);
