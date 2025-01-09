@@ -296,6 +296,24 @@ class HashSet {
 		this.buckets = new Array(this.capacity);
 		this.size = 0;
 	}
+
+	keys() {
+		const arrayLength = this.capacity;
+		let arrayKeys = [];
+
+		for (let i = 0; i < arrayLength; i++) {
+			const bucket = this.buckets[i];
+
+			if (!bucket) continue;
+
+			if (!bucket.head) {
+				arrayKeys.push(bucket);
+			} else {
+				arrayKeys.push(...bucket.getKeys());
+			}
+		}
+		return arrayKeys;
+	}
 }
 
 const test = new HashSet();
@@ -315,7 +333,5 @@ test.set('lion');
 test.set('jet');
 test.set('mouse trap');
 
-test.clear();
 console.log(test.buckets);
-console.log(test.size);
-console.log(test.capacity);
+console.log(test.keys());
