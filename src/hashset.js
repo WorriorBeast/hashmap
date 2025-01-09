@@ -290,6 +290,12 @@ class HashSet {
 	length() {
 		return this.size;
 	}
+
+	clear() {
+		this.capacity = 16;
+		this.buckets = new Array(this.capacity);
+		this.size = 0;
+	}
 }
 
 const test = new HashSet();
@@ -299,7 +305,6 @@ test.set('banana');
 test.set('carrot');
 test.set('dog');
 test.set('elephant');
-console.log(test.size);
 test.set('frog');
 test.set('grape');
 test.set('hat');
@@ -309,7 +314,8 @@ test.set('kite');
 test.set('lion');
 test.set('jet');
 test.set('mouse trap');
-console.log(test.size);
 
-console.log(test.remove('apple'));
+test.clear();
+console.log(test.buckets);
 console.log(test.size);
+console.log(test.capacity);
