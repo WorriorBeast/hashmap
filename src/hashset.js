@@ -243,6 +243,21 @@ class HashSet {
 			return bucket.containsKey(key) ? key : null;
 		}
 	}
+
+	has(key) {
+		if (key.length === 0) return false;
+
+		const index = this.hash(key);
+		const bucket = this.buckets[index];
+
+		if (!bucket) {
+			return false;
+		} else if (!bucket.head) {
+			return key === bucket ? true : false;
+		} else {
+			return bucket.containsKey(key);
+		}
+	}
 }
 
 const test = new HashSet();
@@ -263,6 +278,6 @@ test.set('jet');
 test.set('mouse trap');
 
 console.log(test.buckets);
-console.log(test.get('mouse trap'));
-console.log(test.get('grape'));
-console.log(test.get('games'));
+console.log(test.has('apple'));
+console.log(test.has('dog'));
+console.log(test.has('games'));
