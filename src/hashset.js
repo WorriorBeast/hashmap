@@ -205,6 +205,15 @@ class HashSet {
 
 	set(key) {
 		if (key.length === 0) return;
+		if (this.size / this.capacity >= this.loadFactor) {
+			const keys = this.keys();
+
+			this.capacity *= 2;
+			this.buckets = new Array(this.capacity);
+			this.size = 0;
+
+			keys.forEach((key) => this.set(key));
+		}
 
 		const index = this.hash(key);
 
