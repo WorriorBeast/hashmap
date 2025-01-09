@@ -188,6 +188,7 @@ class HashSet {
 		this.capacity = 16;
 		this.loadFactor = 0.75;
 		this.buckets = new Array(this.capacity);
+		this.size = 0;
 	}
 
 	hash(key) {
@@ -209,6 +210,7 @@ class HashSet {
 
 		if (!this.buckets[index]) {
 			this.buckets[index] = key;
+			this.size++;
 		} else if (!this.buckets[index].head) {
 			if (key === this.buckets[index]) return;
 
@@ -218,10 +220,12 @@ class HashSet {
 			linkedList.append(key);
 
 			this.buckets[index] = linkedList;
+			this.size++;
 		} else {
 			if (this.buckets[index].containsKey(key)) return;
 
 			this.buckets[index].append(key);
+			this.size++;
 		}
 	}
 
