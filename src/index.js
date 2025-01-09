@@ -1,4 +1,5 @@
 //import './style.css';
+import { HashSet } from './hashset';
 
 class Node {
 	constructor(key = null, value = null, next = null) {
@@ -433,3 +434,22 @@ test.set('dog', 'white');
 test.set('grape', 'green');
 
 console.log(test.buckets);
+
+const setTest = new HashSet();
+
+setTest.set('apple', 'red');
+setTest.set('banana', 'yellow');
+setTest.set('carrot', 'orange');
+setTest.set('dog', 'brown');
+setTest.set('elephant', 'gray');
+setTest.set('frog', 'green');
+setTest.set('grape', 'purple');
+setTest.set('hat', 'black');
+setTest.set('ice cream', 'white');
+setTest.set('jacket', 'blue');
+setTest.set('kite', 'pink');
+setTest.set('lion', 'golden');
+setTest.set('jet', 'green');
+setTest.set('mouse trap', 'yellow');
+
+console.log(setTest.buckets);
